@@ -20,7 +20,7 @@ export default function CreatePost({ onCreate }: Props) {
   return (
     <Box component="form" onSubmit={handleSubmit}>
       <Grid container columnSpacing={2} alignItems="flex-end" justifyContent="center">
-        <Grid item xs={4}>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             multiline
@@ -31,8 +31,8 @@ export default function CreatePost({ onCreate }: Props) {
             onChange={(event) => setContent(event.target.value)}
           />
         </Grid>
-        <Grid item xs={1}>
-          <Button type="submit" variant="contained" color="primary">
+        <Grid item xs={12}>
+          <Button type="submit" variant="contained" color="primary" style={{marginTop: 12}}>
             Post
           </Button>
         </Grid>

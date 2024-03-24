@@ -16,7 +16,7 @@ export default function PostGrid({ posts, onDelete }: Props) {
         </Typography>
       )}
       {posts.map((post) => (
-        <Grid item key={post._id} xs={12} display="flex" justifyContent="center">
+        <Grid item key={post._id} xs={12} display="flex" justifyContent="left">
           <PostCard post={post} onDelete={onDelete} />
         </Grid>
       ))}

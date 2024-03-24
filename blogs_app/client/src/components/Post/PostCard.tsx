@@ -16,7 +16,7 @@ export default function PostCard({ post, onDelete }: Props) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ width: "30%" }}>
+    <Card sx={{ width: "50%" }}>
       <CardHeader title={post.author?.username} subheader={new Date(post.createdAt!).toLocaleString("uk-UA")} />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
