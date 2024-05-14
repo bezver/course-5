@@ -1,7 +1,7 @@
 import { getModelToken } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
-import { Comment } from "../../../src/_schemas/comment.schema";
-import { Post } from "../../../src/_schemas/post.schema";
+import { Comment } from "../../../src/_schemas/Comment.schema";
+import { Post } from "../../../src/_schemas/Post.schema";
 import { CommentService } from "../../../src/comment/comment.service";
 import { createUserMock } from "../../utils";
 
