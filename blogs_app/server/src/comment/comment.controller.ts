@@ -48,12 +48,12 @@ export class CommentController {
   }
 
   @Get(":id")
-  getById(@Param("id") id: string) {
+  async getById(@Param("id") id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new HttpException("Invalid comment id", 400);
     }
 
-    const comment = this.commentService.getCommentById(id);
+    const comment = await this.commentService.getCommentById(id);
     if (!comment) {
       throw new HttpException("Comment not found", 404);
     }
