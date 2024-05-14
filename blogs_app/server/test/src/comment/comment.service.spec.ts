@@ -99,7 +99,7 @@ describe("CommentService", () => {
       const result = await service.getCommentById(commentId);
 
       expect(result).toEqual(mockComment);
-      expect(mockCommentModel.findById).toHaveBeenCalledWith(commentId);
+      expect(mockCommentModel.findById).toHaveBeenCalledWith("broken id");
     });
   });
 
