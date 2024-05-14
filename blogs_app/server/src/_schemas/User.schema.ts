@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from "mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
 export class User {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', auto: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "User", auto: true })
   _id: string;
 
   @Prop({ unique: true, required: true })
@@ -19,12 +19,12 @@ export class User {
   verified: boolean;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User).set('toJSON', {
+export const UserSchema = SchemaFactory.createForClass(User).set("toJSON", {
   transform: function (_, ret) {
     delete ret.passwordHash;
     delete ret.email;
     delete ret.verified;
     delete ret.__v;
     return ret;
-  }
+  },
 });
