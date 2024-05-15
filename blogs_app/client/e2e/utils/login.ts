@@ -1,25 +1,20 @@
-import { $, browser } from "@wdio/globals";
+import { browser } from "@wdio/globals";
 import { v4 as uuid } from "uuid";
+import { loginPage } from "../pages/login.page.ts";
+import { registerPage } from "../pages/register.page.ts";
 
-export const login = async (username, password) => {
-  await browser.url("http://localhost:3000/login");
-  await $("#username").setValue(username);
-  await $("#password").setValue(password);
-  await $('button[type="submit"]').click();
+export const login = async (username: string, password: string) => {
+  await loginPage.open();
+  await loginPage.login(username, password);
 };
 
 export const registerNewUser = async () => {
   const username = `e2e-${uuid()}`.substring(0, 10);
   const email = `${username}@mail.com`;
   const password = "qwe123!@#";
-  await browser.url("http://localhost:3000/login");
-  await $("=Don't have an account? Sign Up").click();
 
-  await $("#username").setValue(username);
-  await $("#email").setValue(email);
-  await $("#password").setValue(password);
-  await $("#confirmPassword").setValue(password);
-  await $('button[type="submit"]').click();
+  await registerPage.open();
+  await registerPage.register(username, email, password);
 
   return { username, email, password };
 };

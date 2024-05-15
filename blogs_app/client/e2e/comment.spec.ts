@@ -1,4 +1,5 @@
-import { $, expect } from "@wdio/globals";
+import { expect } from "@wdio/globals";
+import { commentPage } from "./pages/comment.page.ts";
 import { loginAsNewUser } from "./utils/login.ts";
 import { createPost } from "./utils/post.ts";
 
@@ -10,11 +11,10 @@ describe("Comment", () => {
 
   it("should create comment", async () => {
     const commentText = "test comment";
-    await $('[data-testid="post-comments-button"]').click();
-    await $('[data-testid="comment-message-input"] textarea').setValue(commentText);
-    await $('button[type="submit"]').click();
+    await commentPage.open();
+    await commentPage.createComment(commentText);
 
-    const commentElementText = await $('[data-testid="comment-message-text"]').getText();
+    const commentElementText = await commentPage.elementCommentMessageText.getText();
     expect(commentElementText).toBe(commentText);
   });
 });

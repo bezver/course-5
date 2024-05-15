@@ -1,10 +1,10 @@
-import { $, expect } from "@wdio/globals";
+import { expect } from "@wdio/globals";
+import { homePage } from "./pages/home.page.ts";
 import { loginAsNewUser } from "./utils/login.ts";
 
 describe("Login", () => {
   it("should login as a new user", async () => {
     await loginAsNewUser();
-    await new Promise(r => setTimeout(r, 5000));
-    expect(await $('//*[@data-testid="app-name"]').isExisting()).toBeTruthy();
+    expect(await homePage.textAppName.isExisting()).toBeTruthy();
   });
 });

@@ -1,3 +1,18 @@
+import { v4 as uuid } from "uuid";
+
+function generateTimestamp() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+    return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}-${milliseconds}`;
+}
+
 export const config = {
     //
     // ====================
@@ -237,8 +252,11 @@ export const config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+        if (!passed) {
+            await browser.saveScreenshot(`./e2e/screenshots/afterTest/${generateTimestamp()}_${uuid()}.png`);
+        }
+    },
 
 
     /**
@@ -254,8 +272,9 @@ export const config = {
      * @param {number} result 0 - command success, 1 - command error
      * @param {object} error error object if any
      */
-    // afterCommand: function (commandName, args, result, error) {
-    // },
+    afterCommand: async function (commandName, args, result, error) {
+        // await browser.saveScreenshot(`./e2e/screenshots/afterCommand/${generateTimestamp()}_${uuid()}.png`);
+    },
     /**
      * Gets executed after all tests are done. You still have access to all global variables from
      * the test.
