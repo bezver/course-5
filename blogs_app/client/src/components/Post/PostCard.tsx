@@ -37,6 +37,7 @@ export default function PostCard({ post, onDelete }: Props) {
             onClick={() => {
               navigate(`/posts/${post._id}/comments`);
             }}
+            data-testid="post-comments-button"
           >
             Comments
           </Button>

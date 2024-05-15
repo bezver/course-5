@@ -31,6 +31,7 @@ export default function CreateComment({ postId, onCreate }: Props) {
             variant="outlined"
             value={content}
             onChange={(event) => setContent(event.target.value)}
+            data-testid="comment-message-input"
           />
         </Grid>
         <Grid item xs={1}>

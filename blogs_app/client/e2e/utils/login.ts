@@ -28,5 +28,6 @@ export const loginAsNewUser = async () => {
   const credentials = await registerNewUser();
   await browser.pause(500);
   await login(credentials.username, credentials.password);
+  await browser.pause(500);
   return credentials;
 };

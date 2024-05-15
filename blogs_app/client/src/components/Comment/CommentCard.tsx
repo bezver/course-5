@@ -17,7 +17,7 @@ export default function CommentCard({ comment, onDelete }: Props) {
     <Card sx={{ width: "30%" }}>
       <CardHeader title={comment.author?.username} subheader={new Date(comment.createdAt!).toLocaleString("uk-UA")} />
       <CardContent>
-        <Typography variant="body1" color="text.secondary">
+        <Typography variant="body1" color="text.secondary" data-testid="comment-message-text">
           {comment.message}
         </Typography>
       </CardContent>
