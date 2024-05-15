@@ -1,0 +1,59 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    defaults:
+      run:
+        working-directory: ./blogs_app
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+            mongodb-db: blogs
+
+      - name: install server packages
+        run: npm ci
+        working-directory: ./blogs_app/server
+      - name: Create env for server
+        run: echo PORT=3001 >> .env &&
+            echo MONGO_SERVER_URL=mongodb://127.0.0.1:27017/blogs >> .env &&
+            echo JWT_SECRET_KEY=secret >> .env &&
+            echo JWT_VERIFY_USER_SECRET_KEY=secret1 >> .env &&
+            echo JWT_RESET_PASSWORD_SECRET_KEY=secret2 >> .env &&
+            echo JWT_EXPIRATION_TIME=30d >> .env &&
+            echo ALLOWED_ORIGIN=http://localhost:3000 >> .env
+        working-directory: ./blogs_app/server
+      - name: run server
+        run: npm run start &
+        working-directory: ./blogs_app/server
+
+
+      - run: npm ci
+        working-directory: ./blogs_app/client
+      - name: Create env for client
+        run: echo REACT_APP_SERVER_URL=http://localhost:3001 >> .env
+        working-directory: ./blogs_app/client
+      - run: npm run start &
+        working-directory: ./blogs_app/client
+
+      - name: Run e2e
+        run: npm run wdio
+        working-directory: ./blogs_app/client

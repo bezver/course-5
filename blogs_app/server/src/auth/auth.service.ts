@@ -57,7 +57,8 @@ export class AuthService {
       text: `${this.configService.get<string>("ALLOWED_ORIGIN")}/verify-user/${token}`,
     };
 
-    await this.mailerService.sendMail(mail);
+    console.log(mail);
+    // await this.mailerService.sendMail(mail);
   }
 
   async sendResetPasswordEmail(user: User): Promise<void> {

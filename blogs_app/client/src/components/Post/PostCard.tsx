@@ -19,7 +19,7 @@ export default function PostCard({ post, onDelete }: Props) {
     <Card sx={{ width: "50%" }}>
       <CardHeader title={post.author?.username} subheader={new Date(post.createdAt!).toLocaleString("uk-UA")} />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" data-testid="post-message">
           {post.message}
         </Typography>
       </CardContent>

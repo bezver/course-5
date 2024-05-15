@@ -43,7 +43,7 @@ export default function SignUp() {
       navigate("/login");
       toast.success("Account confirmation link sent");
     } catch (error: any) {
-      setErrors(Array.isArray(error.message) ? error.message : [error.message]);
+      setErrors(["Register error"]);
     }
   };
 

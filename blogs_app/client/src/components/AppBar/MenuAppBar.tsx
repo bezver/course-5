@@ -33,7 +33,7 @@ export default function MenuAppBar() {
         <IconButton size="medium" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={onMenuClick}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} data-testid="app-name">
           Blogs
         </Typography>
       </Toolbar>
@@ -43,6 +43,7 @@ export default function MenuAppBar() {
             onMenuClose();
             navigate(`/blogs/${user?.id}`);
           }}
+          data-testid="my-blog-menu-item"
         >
           <ListItemIcon>
             <BookIcon fontSize="small" />
@@ -66,6 +67,7 @@ export default function MenuAppBar() {
             onMenuClose();
             navigate("/profile");
           }}
+          data-testid="profile-menu-item"
         >
           <ListItemIcon>
             <AssignmentIndIcon fontSize="small" />
