@@ -1,3 +1,4 @@
+import { browser } from "@wdio/globals";
 import { v4 as uuid } from "uuid";
 
 function generateTimestamp() {
@@ -44,7 +45,7 @@ export const config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './e2e/**/*.spec.ts'
+        './e2e/features/**/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -134,8 +135,7 @@ export const config = {
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
-    
+    framework: 'cucumber',
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -151,11 +151,31 @@ export const config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ['spec'],
 
-    // Options to be passed to Mocha.
-    // See the full list at http://mochajs.org/
-    mochaOpts: {
-        ui: 'bdd',
-        timeout: 60000
+    cucumberOpts: {
+        // <string[]> (file/dir) require files before executing features
+        require: ['./e2e/step-definitions/*'],
+        // <boolean> show full backtrace for errors
+        backtrace: false,
+        // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+        requireModule: [],
+        // <boolean> invoke formatters without executing steps
+        dryRun: false,
+        // <boolean> abort the run on first failure
+        failFast: false,
+        // <string[]> Only execute the scenarios with name matching the expression (repeatable).
+        name: [],
+        // <boolean> hide step definition snippets for pending steps
+        snippets: true,
+        // <boolean> hide source uris
+        source: true,
+        // <boolean> fail if there are any undefined or pending steps
+        strict: false,
+        // <string> (expression) only execute the features or scenarios with tags matching the expression
+        tagExpression: '',
+        // <number> timeout for step definitions
+        timeout: 60000,
+        // <boolean> Enable this config to treat undefined definitions as warnings.
+        ignoreUndefinedDefinitions: false
     },
 
     //
