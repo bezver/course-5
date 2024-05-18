@@ -14,12 +14,12 @@ export class UserController {
   }
 
   @Get(":id")
-  getById(@Param("id") id: string) {
+  async getById(@Param("id") id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new HttpException("Invalid user id", 400);
     }
 
-    const user = this.userService.getById(id);
+    const user = await this.userService.getById(id);
     if (!user) {
       throw new HttpException("User not found", 404);
     }

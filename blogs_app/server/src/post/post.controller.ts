@@ -64,7 +64,7 @@ export class PostController {
   async create(@Request() request: any, @Body() postDto: PostDto) {
     const author = request.user.id;
 
-    if (!this.userService.getById(author)) {
+    if (!(await this.userService.getById(author))) {
       throw new HttpException("Unknown user", 401);
     }
     return this.postService.create({ author, ...postDto });

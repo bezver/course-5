@@ -1,0 +1,22 @@
+name: Bearer analysis
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+  Analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyze with Bearer
+        uses: bearer/bearer-action@v2
+        with:
+          diff: true
+          bearer-ignore-file: ./blogs_app/bearer.ignore

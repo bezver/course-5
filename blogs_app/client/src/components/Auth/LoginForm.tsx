@@ -70,8 +70,8 @@ export default function SignIn() {
         </Typography>
         {errors.length > 0 && (
           <Box>
-            {errors.map((error, index) => (
-              <Typography key={index} sx={{ color: "red", fontSize: 12 }}>
+            {errors.map((error) => (
+              <Typography key={error} sx={{ color: "red", fontSize: 12 }}>
                 • {error}
               </Typography>
             ))}

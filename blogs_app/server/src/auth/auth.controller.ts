@@ -53,7 +53,7 @@ export class AuthController {
     }
 
     const user = await this.userService.getByName(username);
-    if (!!user) {
+    if (user) {
       this.userService.update(user._id, { verified: true });
       return await this.jwtService.signAsync({ id: user._id });
     } else {

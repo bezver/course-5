@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "bezver-organization",
+        "projectKey": "bezver_course-5"
+    }
+}

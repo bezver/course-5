@@ -61,8 +61,8 @@ export default function ResetPasswordForm() {
         </Typography>
         {errors.length > 0 && (
           <Box>
-            {errors.map((error, index) => (
-              <Typography key={index} sx={{ color: "red", fontSize: 14 }}>
+            {errors.map((error) => (
+              <Typography key={error} sx={{ color: "red", fontSize: 14 }}>
                 • {error}
               </Typography>
             ))}

@@ -15,7 +15,7 @@ export default function Blog() {
   const { userId } = useParams();
 
   useEffect(() => {
-    PostService.listByAuthor(userId!)
+    PostService.listByAuthor(userId ?? "")
       .then((posts) => setPosts(posts))
       .catch((error) => {
         toast.error(error.message);
@@ -49,7 +49,7 @@ export default function Blog() {
       {userId === user?.id && (
         <>
           <CreatePost onCreate={handleCreatePost} />
-          <Divider component="div" role="presentation" sx={{mt: 6}} />
+          <Divider component="div" role="presentation" sx={{ mt: 6 }} />
         </>
       )}
       <PostGrid posts={posts} onDelete={handleDeletePost} />

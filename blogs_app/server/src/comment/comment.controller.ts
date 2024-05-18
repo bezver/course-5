@@ -66,7 +66,7 @@ export class CommentController {
   async create(@Request() request: any, @Body() commentDto: CommentDto) {
     const author = request.user.id;
 
-    if (!this.userService.getById(author)) {
+    if (!(await this.userService.getById(author))) {
       throw new HttpException("Unknown user", 401);
     }
 

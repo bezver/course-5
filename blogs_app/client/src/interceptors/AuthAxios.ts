@@ -12,7 +12,7 @@ authAxios.interceptors.request.use(
     return request;
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(new Error(error.message));
   }
 );
 
@@ -24,7 +24,7 @@ authAxios.interceptors.response.use(
     if (error.response.status === 401) {
       LoginService.logout();
     }
-    return Promise.reject(error);
+    return Promise.reject(new Error(error.message));
   }
 );
 
